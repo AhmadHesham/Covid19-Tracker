@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {useHistory} from 'react-router'
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
@@ -54,21 +55,26 @@ export default function SideBar(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const history = useHistory();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+
+    const handleRouting = (path) => {
+        history.push(path);
+    }
 
     const drawer = (
         <div>
             <div className={classes.toolbar} />
             <Divider />
             <List>
-                <ListItem button>
+                <ListItem button onClick={() => handleRouting("/")}>
                     <ListItemIcon><PersonAddIcon /></ListItemIcon>
                     <ListItemText primary="Data Entry" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={() => handleRouting("/dashboard")}>
                     <ListItemIcon><DashboardIcon /></ListItemIcon>
                     <ListItemText primary="Dashboard" />
                 </ListItem>
