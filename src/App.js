@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import SideBar from './components/navigation/SideBar';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Dashboard from './pages/Dashboard';
+import DataEntry from './pages/DataEntry';
+import FOUROFOUR from './pages/FOUROFOUR';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ width: '100vw', height: '100vh' }}>
+      <Router>
+        <SideBar />
+        <Route exact path="/" render={() => <DataEntry />} />
+        <Route exact path="/dashboard" render={() => <Dashboard />} />
+        <Route exact path="*" render={() => <FOUROFOUR />} /> 
+      </Router>
     </div>
   );
 }
