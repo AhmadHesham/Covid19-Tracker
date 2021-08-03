@@ -94,7 +94,7 @@ export default function UserData() {
     const [startDate, setStartDate] = React.useState(null);
     const [location, setLocation] = React.useState({
         lat: '',
-        long: ''
+        lng: ''
     });
     const [userInfo, setUserInfo] = React.useState({
         firstName: '',
@@ -171,7 +171,7 @@ export default function UserData() {
         if (submitFlag) {
             database.ref(`/patients/${uuidv4()}`).set({
                 ...userInfo,
-                location: location
+                ...location
             })
         }
     }
@@ -185,7 +185,7 @@ export default function UserData() {
             navigator.geolocation.getCurrentPosition((pos) => {
                 setLocation({
                     lat: pos.coords.latitude,
-                    long: pos.coords.longitude
+                    lng: pos.coords.longitude
                 });
                 setChecked(true);
             })
