@@ -1,8 +1,26 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import { v4 as uuidv4 } from 'uuid'
 import Paper from '@material-ui/core/Paper';
 import { Button, Divider, TextField, Typography, FormControlLabel, Checkbox, FormHelperText } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
+import firebase from 'firebase/app';
+import 'firebase/database';
+
+const config = {
+    apiKey: "AIzaSyDhycrqrImtMTAM24n7RT9Pk_P6qpxaQlM",
+    authDomain: "covid19-tracker-93871.firebaseapp.com",
+    databaseURL: "https://covid19-tracker-93871-default-rtdb.europe-west1.firebasedatabase.app/",
+    storageBucket: "covid19-tracker-93871.appspot.com"
+};
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
+else {
+    firebase.app();
+}
+const database = firebase.database();
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -82,7 +100,7 @@ export default function UserData() {
         firstName: '',
         lastName: '',
         job: '',
-        temperature: ''
+        temperature: 37
     })
     const [errors, setErrors] = React.useState({
         firstName: false,
@@ -114,7 +132,7 @@ export default function UserData() {
             })
             submitFlag = false;
         }
-        if(userInfo.lastName === '') {
+        if (userInfo.lastName === '') {
             setErrors((prevState) => {
                 return {
                     ...prevState,
@@ -123,7 +141,7 @@ export default function UserData() {
             })
             submitFlag = false;
         }
-        if(userInfo.job === '') {
+        if (userInfo.job === '') {
             setErrors((prevState) => {
                 return {
                     ...prevState,
@@ -132,7 +150,7 @@ export default function UserData() {
             })
             submitFlag = false;
         }
-        if(!checked) {
+        if (!checked) {
             setErrors((prevState) => {
                 return {
                     ...prevState,
@@ -141,7 +159,7 @@ export default function UserData() {
             })
             submitFlag = false;
         }
-        if(startDate === null) {
+        if (startDate === null) {
             setErrors((prevState) => {
                 return {
                     ...prevState,
@@ -150,8 +168,11 @@ export default function UserData() {
             })
             submitFlag = false;
         }
-        if(submitFlag) {
-            console.log('Hello')
+        if (submitFlag) {
+            database.ref(`/patients/${uuidv4()}`).set({
+                ...userInfo,
+                location: location
+            })
         }
     }
 
@@ -207,7 +228,7 @@ export default function UserData() {
                     </div>
                 </div>
                 <div className={classes.btnWrapper}>
-                    <Button color="primary" onClick={handleSubmit}>Submit</Button>
+                    <Button variant="outlined" color="primary" style={{ color: "#FF8C00", borderColor: "#FF8C00" }} onClick={handleSubmit}>Submit</Button>
                 </div>
             </Paper>
         </div>
