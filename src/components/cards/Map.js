@@ -64,6 +64,7 @@ export default function Map() {
             const loader = new Loader({
                 apiKey: "AIzaSyBWuDcbo205YywWKT0IN18IQe8SRSzJ6U0",
                 version: "weekly",
+                libraries: ["places", "visualization"]
             });
             let center;
             for (const patient in data) {
@@ -80,7 +81,7 @@ export default function Map() {
                         zoom: 17,
                     });
 
-                    console.log(data);
+                    const dataArr = []
                     for (const patient in data) {
                         const marker = new google.maps.Marker({
                             position: {
@@ -90,8 +91,14 @@ export default function Map() {
                             label: data[patient].firstName.charAt(0),
                             map: map
                         })
+                        dataArr.push(new google.maps.LatLng(data[patient].lat, data[patient].lng))
+                        // dataArr.push(data[patient].lat, data[patient].lng);
                     }
 
+                    const heatmap = new google.maps.visualization.HeatmapLayer({
+                        data: dataArr,
+                        map,
+                    });
                 })
                 .catch(err => {
                     console.log(err);
