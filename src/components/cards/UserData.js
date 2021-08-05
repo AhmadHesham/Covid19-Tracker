@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 const temperature = [37, 38, 39, 40, 41];
 
-export default function UserData() {
+export default function UserData(props) {
     const classes = useStyles();
     const [checked, setChecked] = React.useState(false);
     const [startDate, setStartDate] = React.useState(null);
@@ -172,6 +172,10 @@ export default function UserData() {
             database.ref(`/patients/${uuidv4()}`).set({
                 ...userInfo,
                 ...location
+            })
+            .then(res => {
+                console.log("Submitted!");
+                props.handleOpen();
             })
         }
     }
