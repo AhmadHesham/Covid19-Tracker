@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         width: '100%',
-        height: '100%',
+        height: '80%',
         display: 'flex',
         flexDirection: 'row',
         [theme.breakpoints.down("sm")]: {
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         [theme.breakpoints.down("sm")]: {
-            height: '70%'
+            height: '75%'
         }
     },
     midField: {
