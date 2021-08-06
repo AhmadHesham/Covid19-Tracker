@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     },
     inputs: {
         display: 'flex',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
         width: '100%',
