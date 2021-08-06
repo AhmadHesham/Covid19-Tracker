@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         marginLeft: '260px',
         [theme.breakpoints.down("xs")]: {
-            width: '95%',
+            width: '100%',
             marginLeft: 0
         }
     },

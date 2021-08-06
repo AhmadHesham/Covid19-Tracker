@@ -9,10 +9,17 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: '260px',
+        [theme.breakpoints.down("xs")]: {
+            width: '100%',
+            marginLeft: 0
+        }
     },
     container: {
         height: `calc(100% - ${theme.mixins.toolbar.minHeight}px)`,
         marginTop: theme.mixins.toolbar.minHeight,
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
     }
 }))
 
