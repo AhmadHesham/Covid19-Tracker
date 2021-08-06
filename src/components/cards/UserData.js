@@ -30,16 +30,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    container: {
-        width: '100%',
-        height: '80%',
-        display: 'flex',
-        flexDirection: 'row',
-        [theme.breakpoints.down("sm")]: {
-            flexDirection: 'column'
-        },
-        paddingTop: '3vw',
-    },
     paper: {
         backgroundColor: 'rgba(255, 255, 255, 0)',
         width: '80%',
@@ -47,9 +37,32 @@ const useStyles = makeStyles((theme) => ({
         padding: '20px',
         display: 'flex',
         flexDirection: 'column',
+        overflowY: 'scroll',
         [theme.breakpoints.down("sm")]: {
-            height: '75%'
+            height: '75%',
         }
+    },
+    container: {
+        width: '100%',
+        height: '80%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: 'column',
+            height: '100%'
+        },
+    },
+    inputs: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        flexDirection: 'row',
+        width: '100%',
+        height: '95%',
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: 'column'
+        },
     },
     midField: {
         width: '60%',
@@ -82,8 +95,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        height: '20%'
-    }
+        // height: '20%',
+    },
 }));
 
 const temperature = [37, 38, 39, 40, 41];
@@ -173,10 +186,10 @@ export default function UserData(props) {
                 ...userInfo,
                 ...location
             })
-            .then(res => {
-                console.log("Submitted!");
-                props.handleOpen();
-            })
+                .then(res => {
+                    console.log("Submitted!");
+                    props.handleOpen();
+                })
         }
     }
 
@@ -200,39 +213,39 @@ export default function UserData(props) {
         <div className={classes.root}>
             <Paper variant="outlined" elevation={0} className={classes.paper}>
                 <Typography style={{ marginBottom: '15px' }} variant="h3">Data Entry</Typography>
-                <Divider />
+                {/* <Divider /> */}
                 <div className={classes.container}>
-                    <div className={classes.col}>
-                        <TextField name="firstName" className={classes.midField} variant="outlined" label="First Name"
-                            onChange={handleDataChange} helperText={errors.firstName ? "Please enter your first name" : ""} error={errors.firstName} />
-                        <TextField name="lastName" className={classes.midField} variant="outlined" label="Last Name"
-                            onChange={handleDataChange} helperText={errors.lastName ? "Please enter your last name" : ""} error={errors.lastName} />
-                        <TextField name="job" className={classes.lastField} variant="outlined" label="Job"
-                            onChange={handleDataChange} helperText={errors.job ? "Please enter your job" : ""} error={errors.job} />
+                    <div className={classes.inputs}>
+                        <div className={classes.col}>
+                            <TextField name="firstName" className={classes.midField} variant="outlined" label="First Name"
+                                onChange={handleDataChange} helperText={errors.firstName ? "Please enter your first name" : ""} error={errors.firstName} />
+                            <TextField name="lastName" className={classes.midField} variant="outlined" label="Last Name"
+                                onChange={handleDataChange} helperText={errors.lastName ? "Please enter your last name" : ""} error={errors.lastName} />
+                            <TextField name="job" className={classes.lastField} variant="outlined" label="Job"
+                                onChange={handleDataChange} helperText={errors.job ? "Please enter your job" : ""} error={errors.job} />
+                        </div>
+                        <div className={classes.col}>
+                            <TextField helperText={errors.date ? "Please enter your birthdate!" : ""} error={errors.date} type="date" InputLabelProps={{
+                                shrink: true
+                            }} className={classes.midField} variant="outlined" label="Birthday" onChange={handleDateChange} />
+                            <TextField select
+                                // SelectProps={{
+                                //     MenuProps: {
+                                //         TransitionProps: {
+                                //         }
+                                //     }}}
+                                name="temperature" className={classes.midField} variant="outlined" label="Temperature" defaultValue={37} onChange={handleDataChange}>
+                                {temperature.map((option) => (
+                                    <MenuItem key={option} value={option}>
+                                        {option}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <FormControlLabel control={<Checkbox checked={checked} name="checkedD" />} label="Location" />
+                            {errors.location ? <FormHelperText error={errors.location}>Please enable location!</FormHelperText> : ""}
+                        </div>
                     </div>
-                    <div className={classes.col}>
-                        <TextField helperText={errors.date ? "Please enter your birthdate!" : ""} error={errors.date} type="date" InputLabelProps={{
-                            shrink: true
-                        }} className={classes.midField} variant="outlined" label="Birthday" onChange={handleDateChange} />
-                        <TextField select
-                            // SelectProps={{
-                            //     MenuProps: {
-                            //         TransitionProps: {
-                            //         }
-                            //     }}}
-                            name="temperature" className={classes.midField} variant="outlined" label="Temperature" defaultValue={37} onChange={handleDataChange}>
-                            {temperature.map((option) => (
-                                <MenuItem key={option} value={option}>
-                                    {option}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <FormControlLabel control={<Checkbox checked={checked} name="checkedD" />} label="Location" />
-                        {errors.location ? <FormHelperText error={errors.location}>Please enable location!</FormHelperText> : ""}
-                    </div>
-                </div>
-                <div className={classes.btnWrapper}>
-                    <Button variant="outlined" color="primary" style={{ color: "#FF8C00", borderColor: "#FF8C00" }} onClick={handleSubmit}>Submit</Button>
+                    <Button variant="outlined" color="primary" style={{ maxWidth: '100px', color: "#FF8C00", borderColor: "#FF8C00" }} onClick={handleSubmit}>Submit</Button>
                 </div>
             </Paper>
         </div>

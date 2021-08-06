@@ -110,7 +110,7 @@ export default function Map() {
             <Paper variant="outlined" className={classes.paper}>
                 <div className={classes.textWrapper}>
                     <Typography variant="h3">Dashboard</Typography>
-                    <Divider style={{ width: '100%' }} />
+                    {/* <Divider style={{ width: '100%' }} /> */}
                 </div>
                 <div style={{ height: '90%', width: '100%' }}>
                     <div className={classes.map} id="map"></div>
