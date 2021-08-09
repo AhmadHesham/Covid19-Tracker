@@ -57,7 +57,7 @@ Application
 
 ![alt Google Maps Popup](images/googlemappopup.png)
 - I have already entered some data in the database which will appear as markers on the map, but their location is at my own home as the project uses the location information it got from the browser.
-- The heatmap layer for the hotspots requested for the project are displayed as a heatmap under the markers, a screenshot of an example will provided: 
+- The heatmap layer for the hotspots requested for the project are displayed as a heatmap area (the green-ish zone) under the markers, a screenshot of an example will provided: 
 ![alt Heatmap Example](images/heatmap.png)
 - When viewing the patients on the map after entering the data, since the browser uses the current location, the markers will probably stack overeach because of the use of the same data location as mentioned, so I added the first letter of the first name as a label on the marker for clarity as shown in the screenshot below:
 ![alt Marker Labels](images/heatmap.png)
